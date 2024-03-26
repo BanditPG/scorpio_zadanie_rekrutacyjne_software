@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import useMotor from "../hooks/UseMotor";
 import keyboardSettings from "../settings/keyboardSettings";
 
@@ -6,6 +6,7 @@ export default function MotorComponent({ index, isMotorControlEnable }) {
   const {position, strength, setStrength, turnLeft, turnRight, stop} = useMotor(index)
   const [leftKeyPressed, setLeftKeyPressed] = useState(false)
   const [rightKeyPressed, setRightKeyPressed] = useState(false)
+  const canvasRef = useRef(null)
 
   const leftKey = keyboardSettings.motors[index].leftKey
   const rightKey = keyboardSettings.motors[index].rightKey
@@ -44,6 +45,29 @@ export default function MotorComponent({ index, isMotorControlEnable }) {
     }
   }, [isMotorControlEnable, strength]);
 
+  useEffect(() => {
+    const step = 2 * Math.PI / 4095
+    const angle = position * step
+
+    const ctx = canvasRef.current.getContext('2d')
+    const { width, height } = canvasRef.current.getBoundingClientRect();
+
+    ctx.clearRect(0, 0, width, height)
+    ctx.strokeStyle = "white"
+    ctx.fillStyle = "white"
+
+
+    ctx.beginPath()
+    ctx.arc(width/2, height/2, 15, 0, 2 * Math.PI)
+    ctx.fill()
+
+    ctx.moveTo(width/2, height/2)
+    ctx.lineTo(width/2 + 100 * Math.cos(angle), height/2 + 100 * Math.sin(angle))
+    ctx.stroke()
+
+  }, [position])
+
+
   function updateStrength(value) {
     const parsed = parseInt(value)
     if (isNaN(parsed)) 
@@ -56,7 +80,7 @@ export default function MotorComponent({ index, isMotorControlEnable }) {
     <div className="motor-component">
       <p>Motor {index}</p>
       <div style={{ width: "300px", height: "300px", display: "flex", justifyContent: "center", alignItems: "center", border: "1px black dashed" }}>
-        <div>Canvas</div>
+        <canvas width="300px" height="300px" ref={canvasRef}></canvas>
       </div>
       <div>
         <p>Position: {Math.round((position / 4095) * 360)} degrees</p>
