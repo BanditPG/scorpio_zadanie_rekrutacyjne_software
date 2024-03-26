@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import {useRosHook} from "../contexts/RosConnectionContext";
 import ROSLIB from "roslib";
-
+import { motorSettings } from "../settings/rosSettings";
 
 export default function useMotor(motorIndex) {
   const MAX_STRENGTH = 100;
@@ -35,8 +35,8 @@ export default function useMotor(motorIndex) {
   function subscribeToMotorPosition() {
     let motorDataTopic = new ROSLIB.Topic({
       ros: rosRef.current,
-      name: `/virtual_dc_motor_node/get_position_${motorIndex}`,
-      messageType: "std_msgs/UInt16"
+      name: motorSettings[motorIndex].positionTopic.name,
+      messageType: motorSettings[motorIndex].positionTopic.messageType
     })
 
     motorDataTopic.subscribe((message) => {

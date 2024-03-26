@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useContext, createContext } from "react";
 import ROSLIB from "roslib"
-
+import {rosSettings} from "../settings/rosSettings";
 
 const RosContext = createContext(null)
 
@@ -26,7 +26,7 @@ function RosHookProvider() {
 
   useEffect(() => {
     let ros = new ROSLIB.Ros({
-      url: "ws://localhost:9090",
+      url: rosSettings.url,
     });
 
     rosRef.current = ros;

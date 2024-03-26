@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import useMotor from "../hooks/UseMotor";
+import keyboardSettings from "../settings/keyboardSettings";
 
-
-export default function MotorComponent({ index, leftKey, rightKey, isMotorControlEnable }) {
+export default function MotorComponent({ index, isMotorControlEnable }) {
   const {position, strength, setStrength, turnLeft, turnRight, stop} = useMotor(index)
   const [leftKeyPressed, setLeftKeyPressed] = useState(false)
   const [rightKeyPressed, setRightKeyPressed] = useState(false)
 
+  const leftKey = keyboardSettings.motors[index].leftKey
+  const rightKey = keyboardSettings.motors[index].rightKey
 
   useEffect(() => {
     let keyDownHandler = (event) => {
