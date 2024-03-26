@@ -1,6 +1,7 @@
 FROM ros:noetic
 
 RUN apt-get update && apt-get install -y
+RUN apt-get install ros-noetic-rosbridge-suite -y
 
 RUN mkdir -p /opt/ros/catkin_ws/src
 WORKDIR /opt/ros/catkin_ws

@@ -1,13 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+import './styles/index.css';
+import './styles/motor.css';
+import './styles/status.css';
+
+import App from './components/App';
+// import reportWebVitals from './reportWebVitals';
+import { RosProvider } from './contexts/RosConnectionContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RosProvider>
+      <App />
+    </RosProvider>
   </React.StrictMode>
 );
 
