@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import useMotor from "../hooks/UseMotor";
+import useMotor from "../hooks/useMotor";
 import keyboardSettings from "../settings/keyboardSettings";
 
 export default function MotorComponent({ index, isMotorControlEnable }) {
@@ -61,6 +61,7 @@ export default function MotorComponent({ index, isMotorControlEnable }) {
     ctx.arc(width/2, height/2, 15, 0, 2 * Math.PI)
     ctx.fill()
 
+    ctx.beginPath()
     ctx.moveTo(width/2, height/2)
     ctx.lineTo(width/2 + 100 * Math.cos(angle), height/2 + 100 * Math.sin(angle))
     ctx.stroke()

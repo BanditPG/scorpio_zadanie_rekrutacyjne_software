@@ -4,8 +4,8 @@ import ROSLIB from "roslib";
 import { motorSettings } from "../settings/rosSettings";
 
 export default function useMotor(motorIndex) {
-  const MAX_STRENGTH = 100;
-  const MIN_STRENGTH = 13;
+  const MAX_STRENGTH = motorSettings.maxStrength;
+  const MIN_STRENGTH = motorSettings.minStrength;
 
   const { rosRef, rosStatus } = useRosHook();
 
@@ -49,8 +49,8 @@ export default function useMotor(motorIndex) {
   function initMotorControlTopic() {
     let motorControlTopic = new ROSLIB.Topic({
       ros: rosRef.current,
-      name: `/virtual_dc_motor_node/set_cs_${motorIndex}`,
-      messageType: "std_msgs/Int8"
+      name: motorSettings[motorIndex].controlTopic.name,
+      messageType: motorSettings[motorIndex].controlTopic.messageType
     })
 
     motorControlTopic.publish({ data: 0 })

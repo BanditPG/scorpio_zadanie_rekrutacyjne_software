@@ -5,6 +5,10 @@ const rosSettings = {
 const motorSettings = {
     maxStrength: 100,
     minStrength: 13,
+    getMotorJointsLenghtService: {
+        name: "/virtual_dc_motor_node/get_joints_length",
+        serviceType: "virtual_dc_motor/getMotorJointsLength"
+    },
     0: {
         positionTopic: {
             name: "/virtual_dc_motor_node/get_position_0",

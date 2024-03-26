@@ -2,6 +2,7 @@ import { useState } from "react"
 import MotorComponent from "./MotorComponent"
 import {useRosHook} from "../contexts/RosConnectionContext"
 import StatusComponent from "./StatusComponent"
+import ArmComponent from "./ArmComponent"
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <MotorComponent index={1} isMotorControlEnable={isMotorControlEnable} />
         <MotorComponent index={2} isMotorControlEnable={isMotorControlEnable} />
       </div>
+      <ArmComponent />
     </div>
   )
 }
