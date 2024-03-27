@@ -8,12 +8,15 @@ import './styles/status.css';
 import App from './components/App';
 // import reportWebVitals from './reportWebVitals';
 import { RosProvider } from './contexts/RosConnectionContext';
+import { RosMotorsProvider } from './contexts/RosMotorsContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <RosProvider>
-      <App />
+      <RosMotorsProvider>
+        <App />
+      </RosMotorsProvider>
     </RosProvider>
   </React.StrictMode>
 );

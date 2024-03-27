@@ -1,24 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 import useMotorServices from "../hooks/useMotorServices";
 import { useRosHook } from "../contexts/RosConnectionContext";
-import useMotor from "../hooks/useMotor";
+import { useMotor } from "../contexts/RosMotorsContext";
 
 export default function ArmComponent() {
-    const { rosStatus } = useRosHook();
-    const { getMotorJointsLenght } = useMotorServices();
+    const { rosStatus } = useRosHook()
+    const { getMotorJointsLenght } = useMotorServices()
+    
+    const {position: position1, home: home1} = useMotor(0)
+    const {position: position2, home: home2} = useMotor(1)
+    const {position: position3, home: home3} = useMotor(2)
 
-    const [jointsLength, setJointsLength] = useState([0, 0, 0]);
-
-    const {position: position1} = useMotor(0)
-    const {position: position2} = useMotor(1)
-    const {position: position3} = useMotor(2)
-
+    const [jointsLength, setJointsLength] = useState([0, 0, 0])
     const canvasRef = useRef(null);
+
+    const scale = 0.7
 
     useEffect(() => {
         if (rosStatus.status === "connected") {
             (async () => {
-                setJointsLength(await getMotorJointsLenght());
+                let jointsLength = await getMotorJointsLenght()
+                setJointsLength(jointsLength.map(jointLength => jointLength * scale))
             })()
         }
 
@@ -94,8 +96,9 @@ export default function ArmComponent() {
     }
 
     return (
-        <div>
-            <canvas width="1200px" height="1200px" ref={canvasRef}></canvas>
+        <div style={{marginTop: "20px", textAlign: "center"}}>
+            <button onClick={() => {home1(); home2(); home3()}}>Home</button> <br />
+            <canvas width={1200*scale + "px"} height={1200 * scale + "px"} ref={canvasRef}></canvas>
         </div>
     )
 }

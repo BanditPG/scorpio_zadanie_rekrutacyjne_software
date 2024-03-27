@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import useMotor from "../hooks/useMotor";
+import { useMotor } from "../contexts/RosMotorsContext";
 import keyboardSettings from "../settings/keyboardSettings";
 
 export default function MotorComponent({ index, isMotorControlEnable }) {
@@ -43,7 +43,7 @@ export default function MotorComponent({ index, isMotorControlEnable }) {
       document.removeEventListener("keydown", keyDownHandler)
       document.removeEventListener("keyup", keyUpHandler)
     }
-  }, [isMotorControlEnable, strength]);
+  }, [isMotorControlEnable, stop, turnLeft, turnRight]);
 
   useEffect(() => {
     const step = 2 * Math.PI / 4095
