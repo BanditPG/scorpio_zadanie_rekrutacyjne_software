@@ -1,6 +1,6 @@
-import { useEffect, useState, useRef, useContext, createContext } from "react";
-import ROSLIB from "roslib"
-import {rosSettings} from "../settings/rosSettings";
+import { useEffect, useState, useRef, useContext, createContext } from 'react'
+import ROSLIB from 'roslib'
+import { rosSettings } from '../settings/rosSettings'
 
 const RosContext = createContext(null)
 
@@ -16,62 +16,59 @@ export function RosProvider({ children }) {
   )
 }
 
-
 function RosHookProvider() {
-  const rosRef = useRef(null);
+  const rosRef = useRef(null)
   const [rosStatus, setRosStatus] = useState({
-    status: "disconnected",
-    message: "Not connected to websocket server.",
-  });
+    status: 'disconnected',
+    message: 'Not connected to websocket server.',
+  })
 
   useEffect(() => {
     let ros = new ROSLIB.Ros({
       url: rosSettings.url,
-    });
+    })
 
-    rosRef.current = ros;
+    rosRef.current = ros
 
-    ros.on("connection", () => {
+    ros.on('connection', () => {
       setRosStatus({
-        status: "connected",
-        message: "Connected to websocket server.",
-      });
+        status: 'connected',
+        message: 'Connected to websocket server.',
+      })
 
-      console.log("Connected to websocket server.");
-    });
+      console.log('Connected to websocket server.')
+    })
 
-    ros.on("error", (error) => {
+    ros.on('error', (error) => {
       setRosStatus({
-        status: "error",
-        message: "Error connecting to websocket server: " + error,
-      });
+        status: 'error',
+        message: 'Error connecting to websocket server: ' + error,
+      })
 
-      if (rosRef.current === ros)
-        rosRef.current = null;
+      if (rosRef.current === ros) rosRef.current = null
 
-      console.log("Error connecting to websocket server: ", error);
-    });
+      console.log('Error connecting to websocket server: ', error)
+    })
 
-    ros.on("close", () => {
+    ros.on('close', () => {
       setRosStatus({
-        status: "disconnected",
-        message: "Connection to websocket server closed.",
-      });
+        status: 'disconnected',
+        message: 'Connection to websocket server closed.',
+      })
 
-      if (rosRef.current === ros)
-        rosRef.current = null;
+      if (rosRef.current === ros) rosRef.current = null
 
-      console.log("Connection to websocket server closed.");
-    });
+      console.log('Connection to websocket server closed.')
+    })
 
     return () => {
-      ros.close();
-      rosRef.current = null;
-    };
-  }, []);
+      ros.close()
+      rosRef.current = null
+    }
+  }, [])
 
   return {
     rosRef,
     rosStatus,
-  };
+  }
 }

@@ -1,31 +1,31 @@
 .status-component {
-    padding: 15px;
-    background-color: #1f1f1f;
-    box-shadow: 8px 8px 25px -14px rgba(29, 29, 29, 1);
-    transition: ease-in-out 0.2s;
-    width: fit-content;
-    user-select: none;
-    font-size: 15px;
-    
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  padding: 15px;
+  background-color: #1f1f1f;
+  box-shadow: 8px 8px 25px -14px rgba(29, 29, 29, 1);
+  transition: ease-in-out 0.2s;
+  width: fit-content;
+  user-select: none;
+  font-size: 15px;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
 }
 
 .status-component-button:hover {
-    background-color: #3b3b3b;
-    cursor: pointer;
-    border: 3px solid #d8d4cf00;
+  background-color: #3b3b3b;
+  cursor: pointer;
+  border: 3px solid #d8d4cf00;
 }
 
 .status-green {
-    color: white;
-    background-color: green;
-    border: lightgreen solid 3px;
+  color: white;
+  background-color: green;
+  border: lightgreen solid 3px;
 }
 
 .status-red {
-    color: white;
-    background-color: red;
-    border: lightcoral solid 3px;
+  color: white;
+  background-color: red;
+  border: lightcoral solid 3px;
 }
