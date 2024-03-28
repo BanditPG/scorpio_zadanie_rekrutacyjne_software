@@ -20,3 +20,7 @@
   background-color: #1f1f1f;
   box-shadow: 8px 8px 25px -14px rgba(29, 29, 29, 1);
 }
+
+.motor-component canvas {
+  border: 1px black dashed;
+}

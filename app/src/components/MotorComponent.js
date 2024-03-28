@@ -13,7 +13,7 @@ export default function MotorComponent({ index, isMotorControlEnable }) {
   const rightKey = keyboardSettings.motors[index].rightKey
 
   useEffect(() => {
-    let keyDownHandler = (event) => {
+    let keyDownHandler = event => {
       if (event.key === leftKey) {
         setLeftKeyPressed(true)
         turnLeft()
@@ -23,7 +23,7 @@ export default function MotorComponent({ index, isMotorControlEnable }) {
       }
     }
 
-    let keyUpHandler = (event) => {
+    let keyUpHandler = event => {
       if (event.key === leftKey) {
         stop()
         setLeftKeyPressed(false)
@@ -79,47 +79,41 @@ export default function MotorComponent({ index, isMotorControlEnable }) {
 
   return (
     <div className="motor-component">
-      <p>Motor {index}</p>
-      <div
-        style={{
-          width: '300px',
-          height: '300px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          border: '1px black dashed',
-        }}
-      >
-        <canvas width="300px" height="300px" ref={canvasRef}></canvas>
-      </div>
+      <p style={{ textAlign: 'center' }}>Motor {index}</p>
+
+      <canvas width="300px" height="300px" ref={canvasRef}></canvas>
+
       <div>
         <p>Position: {Math.round((position / 4095) * 360)} degrees</p>
+
         <div style={{ display: 'flex', gap: '7px' }}>
-          <div
-            className={
-              'keyboard-key' + (leftKeyPressed ? ' keyboard-key-pressed' : '')
-            }
-          >
-            {leftKey}
-          </div>
-          <div
-            className={
-              'keyboard-key' + (rightKeyPressed ? ' keyboard-key-pressed' : '')
-            }
-          >
-            {rightKey}
-          </div>
+          <KeyboardKey keyName={leftKey} isPressed={leftKeyPressed} />
+          <KeyboardKey keyName={rightKey} isPressed={rightKeyPressed} />
         </div>
-        Strength:{' '}
-        <input
-          type="range"
-          min="13"
-          max="100"
-          value={strength}
-          onChange={(e) => updateStrength(e.target.value)}
-        />{' '}
-        {strength}%
+
+        <div style={{ marginTop: '16px' }}>
+          <span style={{ marginRight: '5px' }}>Strength:</span>
+
+          <input
+            type="range"
+            min="13"
+            max="100"
+            value={strength}
+            onChange={e => updateStrength(e.target.value)}
+          />
+
+          <span style={{ marginLeft: '5px' }}>{strength}%</span>
+        </div>
       </div>
+    </div>
+  )
+}
+
+function KeyboardKey({ keyName, isPressed }) {
+  return (
+    <div
+      className={'keyboard-key' + (isPressed ? ' keyboard-key-pressed' : '')}>
+      {keyName}
     </div>
   )
 }

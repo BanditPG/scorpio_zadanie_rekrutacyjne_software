@@ -16,7 +16,7 @@ export default function useMotorServices() {
     })
 
     return new Promise((resolve, reject) => {
-      service.callService({}, (result) => {
+      service.callService({}, result => {
         resolve(result.data)
       })
     })

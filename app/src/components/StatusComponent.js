@@ -6,8 +6,7 @@ export default function StatusComponent({ text, staus, changeStatus = null }) {
           'status-component status-component-button ' +
           (staus ? 'status-green' : 'status-red')
         }
-        onClick={changeStatus}
-      >
+        onClick={changeStatus}>
         {text}
       </button>
     )
@@ -15,8 +14,7 @@ export default function StatusComponent({ text, staus, changeStatus = null }) {
 
   return (
     <div
-      className={'status-component ' + (staus ? 'status-green' : 'status-red')}
-    >
+      className={'status-component ' + (staus ? 'status-green' : 'status-red')}>
       {text}
     </div>
   )

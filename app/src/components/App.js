@@ -31,8 +31,7 @@ function App() {
           display: 'flex',
           justifyContent: 'space-between',
           marginTop: '50px',
-        }}
-      >
+        }}>
         <MotorComponent index={0} isMotorControlEnable={isMotorControlEnable} />
         <MotorComponent index={1} isMotorControlEnable={isMotorControlEnable} />
         <MotorComponent index={2} isMotorControlEnable={isMotorControlEnable} />

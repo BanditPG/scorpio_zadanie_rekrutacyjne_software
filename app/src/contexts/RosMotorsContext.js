@@ -90,7 +90,7 @@ function RosMotorHookProvider(motorIndex) {
       messageType: motorSettings[motorIndex].positionTopic.messageType,
     })
 
-    motorDataTopic.subscribe((message) => {
+    motorDataTopic.subscribe(message => {
       setPosition(message.data)
     })
 
@@ -129,7 +129,6 @@ function RosMotorHookProvider(motorIndex) {
     )
       return
 
-    console.log(`Turning right: ${strength}`)
     controlTopic.current.ref.publish({ data: strength })
     controlTopic.current.lastSet = strength
   }

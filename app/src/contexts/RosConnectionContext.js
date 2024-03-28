@@ -39,7 +39,7 @@ function RosHookProvider() {
       console.log('Connected to websocket server.')
     })
 
-    ros.on('error', (error) => {
+    ros.on('error', error => {
       setRosStatus({
         status: 'error',
         message: 'Error connecting to websocket server: ' + error,
