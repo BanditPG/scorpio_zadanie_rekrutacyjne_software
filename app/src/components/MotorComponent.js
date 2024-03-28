@@ -38,6 +38,8 @@ export default function MotorComponent({ index, isMotorControlEnable }) {
       document.addEventListener('keyup', keyUpHandler)
     } else {
       stop()
+      setLeftKeyPressed(false)
+      setRightKeyPressed(false)
     }
 
     return () => {
